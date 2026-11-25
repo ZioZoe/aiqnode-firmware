@@ -1,0 +1,12 @@
+AIQnode firmware - binary distribution license
+
+Copyright (c) 2026 ZioZoe Software Labs. All rights reserved.
+
+Permission is granted to use the AIQnode firmware binaries in this repository, free of charge, on boards you own,
+and to redistribute the unmodified files together with this license.
+
+The source code is not included and no right to it is granted. You may not sell the files on their own.
+
+THE FIRMWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. TO THE FULLEST EXTENT ALLOWED BY LAW, THE AUTHORS ARE
+NOT LIABLE FOR ANY DAMAGE OR LOSS ARISING FROM ITS USE, INCLUDING DAMAGE TO BOARDS OR CONNECTED EQUIPMENT. Controlling
+pumps, motors and mains-powered equipment can be dangerous: use certified components and follow local regulations.
