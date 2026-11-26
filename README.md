@@ -10,13 +10,13 @@ Open **https://aiqnode.com/flash/**, plug your board into your computer with a U
 
 ## Download
 
-Latest version: **0.3.4** — [open the latest release](../../releases/latest)
+Latest version: **0.3.5** — [open the latest release](../../releases/latest)
 
 | Board | File | SHA-256 |
 |---|---|---|
-| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.4.bin` | `2d81c6ea21fd836a1d15699dce77e2982b8ffb72680feab0db6a5b4a55682202` |
-| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.4.bin` | `b784654f4925d82a230f13f82015143e03a68b235c8db4b57324cdc4ae4a2dfd` |
-| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.4.bin` | `22ab564fec03be3bf7ecf2a78849f8e54100245a256d274611ddc3ce465b11dc` |
+| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.5.bin` | `7692084829f6d63d66b7bd097735ec02ed30e2311905125db5a36c7039dd70dc` |
+| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.5.bin` | `e76ad11933839cefbbe9262f11870ba60f24ee684da633ef02693e17b00d5e74` |
+| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.5.bin` | `d6b0a97367588dde7ba39343baaf322da7335e55753e127ecba58d99a404093a` |
 
 Not sure which board you have? Look at the text printed on the chip shield: **ESP32-S3** means the S3 file, **ESP8266** means the ESP8266 file, any other ESP32 means the ESP32 file. ESP32-C3, C6 and S2 are not supported yet.
 
@@ -27,12 +27,21 @@ The full step-by-step guide with troubleshooting is at **https://aiqnode.com/fla
 With [esptool](https://docs.espressif.com/projects/esptool/):
 
 ```
-esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.4.bin
-esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.4.bin
-esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.4.bin
+esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.5.bin
+esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.5.bin
+esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.5.bin
 ```
 
 Or in Chrome or Edge open <https://espressif.github.io/esptool-js/>, connect your board, set the flash address to `0x0`, choose the `.bin` for your board and press Program. Check a download with `sha256sum <file>` and compare it with the table above.
+
+## What is new in 0.3.5
+
+- **DS18B20** waterproof temperature probe (one sensor per pin, 4.7 kOhm pull-up).
+- **HC-SR04** ultrasonic distance sensor (Trig and Echo pins; the 5 V Echo needs a 1k/2k divider).
+- **Servo motors** (SG90, MG996R), set to an angle from 0 to 180°.
+- Analog inputs can be shown in real units (value at 0 V and at 3.3 V, and a unit).
+
+Needs the AIQnode app update that adds these components.
 
 ## What is new in 0.3.4
 
