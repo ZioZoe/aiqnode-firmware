@@ -10,13 +10,13 @@ Open **https://aiqnode.com/flash/**, plug your board into your computer with a U
 
 ## Download
 
-Latest version: **0.3.2** — [open the latest release](../../releases/latest)
+Latest version: **0.3.3** — [open the latest release](../../releases/latest)
 
 | Board | File | SHA-256 |
 |---|---|---|
-| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.2.bin` | `6945b97a9815dbbfb41cc40faac82a07c089af04aa3d5ec1fe3646be4235a6c9` |
-| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.2.bin` | `cb50bb2b3a8c91cc6887cd808c7f4cd0fefe518576ab8939437ccdcbcf2707b7` |
-| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.2.bin` | `7c9eb31198d10f926386a135e6cbc1fcf1a7b6a827d26d6cbe041c4add1d8e01` |
+| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.3.bin` | `ef159222ce9880d740ce51eb504a13267980a6224cb6351e1e00520519d086a9` |
+| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.3.bin` | `8c47f02e7c05b4149220800ca97eaed367eb8b9423e5164a3016c708b7371889` |
+| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.3.bin` | `2a9938634d79d4ab61d6fe30a790fa5767aed232ac116a775887a7d10b1e3abe` |
 
 Not sure which board you have? Look at the text printed on the chip shield: **ESP32-S3** means the S3 file, **ESP8266** means the ESP8266 file, any other ESP32 means the ESP32 file. ESP32-C3, C6 and S2 are not supported yet.
 
@@ -27,12 +27,20 @@ The full step-by-step guide with troubleshooting is at **https://aiqnode.com/fla
 With [esptool](https://docs.espressif.com/projects/esptool/):
 
 ```
-esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.2.bin
-esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.2.bin
-esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.2.bin
+esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.3.bin
+esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.3.bin
+esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.3.bin
 ```
 
 Or in Chrome or Edge open <https://espressif.github.io/esptool-js/>, connect your board, set the flash address to `0x0`, choose the `.bin` for your board and press Program. Check a download with `sha256sum <file>` and compare it with the table above.
+
+## What is new in 0.3.3
+
+- New outputs: **Digital output** (on/off), **PWM output** (0 to 100 %, for dimming LEDs or setting fan and motor speed through a driver) and **Analog output** (a real 0 to 3.3 V voltage, classic ESP32 on GPIO 25 and 26 only).
+- Pins the board needs for itself are locked: GPIO 0 (BOOT/FLASH button) on all boards, GPIO 1, 3 (USB serial) and 12 (flash voltage) on the ESP32, and GPIO 33 to 37 (PSRAM) on the ESP32-S3.
+- The one-hour automatic switch-off also covers PWM and analog outputs.
+
+Needs the AIQnode app update that adds these outputs.
 
 ## What is new in 0.3.2
 
