@@ -10,13 +10,13 @@ Open **https://aiqnode.com/flash/**, plug your board into your computer with a U
 
 ## Download
 
-Latest version: **0.3.3** — [open the latest release](../../releases/latest)
+Latest version: **0.3.4** — [open the latest release](../../releases/latest)
 
 | Board | File | SHA-256 |
 |---|---|---|
-| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.3.bin` | `ef159222ce9880d740ce51eb504a13267980a6224cb6351e1e00520519d086a9` |
-| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.3.bin` | `8c47f02e7c05b4149220800ca97eaed367eb8b9423e5164a3016c708b7371889` |
-| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.3.bin` | `2a9938634d79d4ab61d6fe30a790fa5767aed232ac116a775887a7d10b1e3abe` |
+| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.4.bin` | `2d81c6ea21fd836a1d15699dce77e2982b8ffb72680feab0db6a5b4a55682202` |
+| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.4.bin` | `b784654f4925d82a230f13f82015143e03a68b235c8db4b57324cdc4ae4a2dfd` |
+| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.4.bin` | `22ab564fec03be3bf7ecf2a78849f8e54100245a256d274611ddc3ce465b11dc` |
 
 Not sure which board you have? Look at the text printed on the chip shield: **ESP32-S3** means the S3 file, **ESP8266** means the ESP8266 file, any other ESP32 means the ESP32 file. ESP32-C3, C6 and S2 are not supported yet.
 
@@ -27,12 +27,19 @@ The full step-by-step guide with troubleshooting is at **https://aiqnode.com/fla
 With [esptool](https://docs.espressif.com/projects/esptool/):
 
 ```
-esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.3.bin
-esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.3.bin
-esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.3.bin
+esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.4.bin
+esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.4.bin
+esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.4.bin
 ```
 
 Or in Chrome or Edge open <https://espressif.github.io/esptool-js/>, connect your board, set the flash address to `0x0`, choose the `.bin` for your board and press Program. Check a download with `sha256sum <file>` and compare it with the table above.
+
+## What is new in 0.3.4
+
+- DHT11 and DHT22 sensors now give readings: the reader was rewritten (it used to drop every reading).
+- If a DHT sensor gives no reading, the board says so in its log (Logs & Console on aiqnode.com/flash) about every 30 seconds.
+- Buttons and switches are refused on pins where they cannot work (no pull-up, or a pull-down on the board), and DHT sensors on ESP8266 GPIO 15 (D8), which would stop the board from starting.
+- Boards with many components publish their full component list to the cloud.
 
 ## What is new in 0.3.3
 
