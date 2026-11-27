@@ -10,13 +10,13 @@ Open **https://aiqnode.com/flash/**, plug your board into your computer with a U
 
 ## Download
 
-Latest version: **0.3.7** — [open the latest release](../../releases/latest)
+Latest version: **0.3.8** — [open the latest release](../../releases/latest)
 
 | Board | File | SHA-256 |
 |---|---|---|
-| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.7.bin` | `cfa517c49206fc9d34d44062f54fbd246160ee6dc67f8fc69fd543e76cdab51a` |
-| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.7.bin` | `3155c1d151b00a41fef8895cc5de18c40a64fc9c0e1b635bf735e4fe79acb1a7` |
-| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.7.bin` | `5f3f1351cd35b1203eebee16b27926029b3e8310afcfb3438f7bcf8ce33f6016` |
+| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.8.bin` | `f245d7ca4adcf1f310ba5801d9060b69ce45deed6f3dc75db446ab24ed89aa7a` |
+| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.8.bin` | `e4b747434dc0f42f963c33a26d60a10ddf2d1cfa000918d0509a712cc2f93916` |
+| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.8.bin` | `48587682521c7cdcf4278275a443cb3ace29e96d193fffa503dae73c0b443ea1` |
 
 Not sure which board you have? Look at the text printed on the chip shield: **ESP32-S3** means the S3 file, **ESP8266** means the ESP8266 file, any other ESP32 means the ESP32 file. ESP32-C3, C6 and S2 are not supported yet.
 
@@ -27,12 +27,16 @@ The full step-by-step guide with troubleshooting is at **https://aiqnode.com/fla
 With [esptool](https://docs.espressif.com/projects/esptool/):
 
 ```
-esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.7.bin
-esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.7.bin
-esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.7.bin
+esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.8.bin
+esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.8.bin
+esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.8.bin
 ```
 
 Or in Chrome or Edge open <https://espressif.github.io/esptool-js/>, connect your board, set the flash address to `0x0`, choose the `.bin` for your board and press Program. Check a download with `sha256sum <file>` and compare it with the table above.
+
+## What is new in 0.3.8
+
+- Fixed a white Wi-Fi setup page: the board now sends the page straight from flash instead of copying it into memory, which often failed on ESP8266 boards with the hotspot running.
 
 ## What is new in 0.3.7
 
