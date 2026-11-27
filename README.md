@@ -10,13 +10,13 @@ Open **https://aiqnode.com/flash/**, plug your board into your computer with a U
 
 ## Download
 
-Latest version: **0.3.8** — [open the latest release](../../releases/latest)
+Latest version: **0.3.9** — [open the latest release](../../releases/latest)
 
 | Board | File | SHA-256 |
 |---|---|---|
-| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.8.bin` | `f245d7ca4adcf1f310ba5801d9060b69ce45deed6f3dc75db446ab24ed89aa7a` |
-| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.8.bin` | `e4b747434dc0f42f963c33a26d60a10ddf2d1cfa000918d0509a712cc2f93916` |
-| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.8.bin` | `48587682521c7cdcf4278275a443cb3ace29e96d193fffa503dae73c0b443ea1` |
+| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.9.bin` | `1fc134d0a8551df34dd549b20cf354bcb3cec970780b5d4e2327c81b2950c516` |
+| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.9.bin` | `237a30996e3d3247ea24fdcd7064b1f438c1eafced3de0401b3aa06fa8696467` |
+| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.9.bin` | `87fa8ca720b1b8d005772de871ea2c537c53f827cbbb99caaac1c32c18334f6f` |
 
 Not sure which board you have? Look at the text printed on the chip shield: **ESP32-S3** means the S3 file, **ESP8266** means the ESP8266 file, any other ESP32 means the ESP32 file. ESP32-C3, C6 and S2 are not supported yet.
 
@@ -27,12 +27,18 @@ The full step-by-step guide with troubleshooting is at **https://aiqnode.com/fla
 With [esptool](https://docs.espressif.com/projects/esptool/):
 
 ```
-esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.8.bin
-esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.8.bin
-esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.8.bin
+esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.9.bin
+esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.9.bin
+esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.9.bin
 ```
 
 Or in Chrome or Edge open <https://espressif.github.io/esptool-js/>, connect your board, set the flash address to `0x0`, choose the `.bin` for your board and press Program. Check a download with `sha256sum <file>` and compare it with the table above.
+
+## What is new in 0.3.9
+
+- The board keeps its Wi-Fi radio awake, so phones reach it reliably. Some routers stopped passing the phone's requests to a sleeping board: the app found the board but could not connect.
+- The Wi-Fi setup page says the board uses 2.4 GHz only and warns when a guest network is chosen.
+- Updates keep your settings on ESP32 and ESP32-S3: the browser installer now writes two pieces that skip the settings area. For esptool, use the `-boot.bin` and `-app.bin` files of this release: `write_flash 0x0 aiqnode-esp32-0.3.9-boot.bin 0xe000 aiqnode-esp32-0.3.9-app.bin`. The single `.bin` is for first installs; written at 0x0 it also clears the Wi-Fi, pairing code and components.
 
 ## What is new in 0.3.8
 
