@@ -10,15 +10,16 @@ Open **https://aiqnode.com/flash/**, plug your board into your computer with a U
 
 ## Download
 
-Latest version: **0.3.9** — [open the latest release](../../releases/latest)
+Latest version: **0.3.10** — [open the latest release](../../releases/latest)
 
 | Board | File | SHA-256 |
 |---|---|---|
-| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.9.bin` | `1fc134d0a8551df34dd549b20cf354bcb3cec970780b5d4e2327c81b2950c516` |
-| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.9.bin` | `237a30996e3d3247ea24fdcd7064b1f438c1eafced3de0401b3aa06fa8696467` |
-| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.9.bin` | `87fa8ca720b1b8d005772de871ea2c537c53f827cbbb99caaac1c32c18334f6f` |
+| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.10.bin` | `cda7daffcf3f3a242aca4c3b991776bed3c6f87303d52a076bb0590bebb2401b` |
+| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.10.bin` | `133d4f79d5fcea299ad5a22d726fa721c86638f3a8480fb62ceb2920f10ddf8b` |
+| ESP32-C3 (SuperMini, DevKitM-1) | `aiqnode-esp32c3-0.3.10.bin` | `2e11ad83091aadce48db8c5bd28b7fe8559a5a15d1791cf32a333033d6495dce` |
+| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.10.bin` | `d7f7ddbe8a7ddd567f2c4b8c2f308489b98b1c037d15e5119d39334eeb3f2fdd` |
 
-Not sure which board you have? Look at the text printed on the chip shield: **ESP32-S3** means the S3 file, **ESP8266** means the ESP8266 file, any other ESP32 means the ESP32 file. ESP32-C3, C6 and S2 are not supported yet.
+Not sure which board you have? Look at the text printed on the chip shield: **ESP32-S3** means the S3 file, **ESP32-C3** the C3 file, **ESP8266** means the ESP8266 file, any other ESP32 means the ESP32 file. ESP32-C6 and S2 are not supported yet.
 
 ## Flash a downloaded file
 
@@ -27,12 +28,18 @@ The full step-by-step guide with troubleshooting is at **https://aiqnode.com/fla
 With [esptool](https://docs.espressif.com/projects/esptool/):
 
 ```
-esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.9.bin
-esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.9.bin
-esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.9.bin
+esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.10.bin
+esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.10.bin
+esptool.py --chip esp32c3 --port /dev/ttyACM0 write_flash 0x0 aiqnode-esp32c3-0.3.10.bin
+esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.10.bin
 ```
 
 Or in Chrome or Edge open <https://espressif.github.io/esptool-js/>, connect your board, set the flash address to `0x0`, choose the `.bin` for your board and press Program. Check a download with `sha256sum <file>` and compare it with the table above.
+
+## What is new in 0.3.10
+
+- ESP32-C3 support: ESP32-C3 SuperMini and ESP32-C3-DevKitM-1. The BOOT button is GPIO 9; on the SuperMini the log and pairing code come over its USB port. At most 3 PWM outputs and 3 servos.
+- ESP32, ESP32-S3 and ESP32-C3 use a larger app area (1.9 MB, "Minimal SPIFFS" layout), so there is room for more sensors. Your settings are kept when you update from this page or with the `-boot.bin` and `-app.bin` pieces.
 
 ## What is new in 0.3.9
 
