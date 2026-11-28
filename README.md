@@ -2,7 +2,7 @@
 
 Free firmware that turns an ESP32, ESP32-S3 or ESP8266 board into an [AIQnode](https://aiqnode.com) device. Flash it once, then set up Wi-Fi, pins, dashboards and automations from the AIQnode app.
 
-This repository holds the **compiled firmware files only** (in the [`bin/`](bin) folder and in [Releases](../../releases)). The source code is not published.
+This repository holds the **compiled firmware files only**: the latest version in the [`bin/`](bin) folder, every version in [Releases](../../releases). The source code is not published.
 
 ## Install from your browser (easiest)
 
