@@ -10,14 +10,14 @@ Open **https://aiqnode.com/flash/**, plug your board into your computer with a U
 
 ## Download
 
-Latest version: **0.3.11** — [open the latest release](../../releases/latest)
+Latest version: **0.3.13** — [open the latest release](../../releases/latest)
 
 | Board | File | SHA-256 |
 |---|---|---|
-| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.11.bin` | `3d021a4789463905659d371d5356e5055031a127a45ce75faf943e8732d093cc` |
-| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.11.bin` | `2515cd7b7975cf9ce21adfc2cedce63318e68e109c126a665947885e469c20f5` |
-| ESP32-C3 (SuperMini, DevKitM-1) | `aiqnode-esp32c3-0.3.11.bin` | `69ef7a26a33521ba012db8b575e38b9a9d81a5bdb128ad4d7b10ba04985cf3cf` |
-| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.11.bin` | `e6643141e91ca0073b22c0583a4ffa0a26224c673964604c47fe8f58834c23bd` |
+| ESP32 (DevKit, WROOM) | `aiqnode-esp32-0.3.13.bin` | `7a95818329ae081aeec79d8a82a7954a7609c9106754a00044129b0a663952e9` |
+| ESP32-S3 (DevKitC) | `aiqnode-esp32s3-0.3.13.bin` | `610ea2370939598dcba9fe5d81924930c30df627c8b40c4a62f86c3cf5933229` |
+| ESP32-C3 (SuperMini, DevKitM-1) | `aiqnode-esp32c3-0.3.13.bin` | `bbe0378648ebcfb2daa3cb4a889d8d62bbcef9756b4b048aaf829f3307bfd0e5` |
+| ESP8266 (NodeMCU, Wemos D1 mini) | `aiqnode-esp8266-0.3.13.bin` | `271c8a21855314ae35d055f8f57cfaf7cce9d86c3b96236b79e325f058ac8f7b` |
 
 Not sure which board you have? Look at the text printed on the chip shield: **ESP32-S3** means the S3 file, **ESP32-C3** the C3 file, **ESP8266** means the ESP8266 file, any other ESP32 means the ESP32 file. ESP32-C6 and S2 are not supported yet.
 
@@ -28,13 +28,24 @@ The full step-by-step guide with troubleshooting is at **https://aiqnode.com/fla
 With [esptool](https://docs.espressif.com/projects/esptool/):
 
 ```
-esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.11.bin
-esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.11.bin
-esptool.py --chip esp32c3 --port /dev/ttyACM0 write_flash 0x0 aiqnode-esp32c3-0.3.11.bin
-esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.11.bin
+esptool.py --chip esp32   --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32-0.3.13.bin
+esptool.py --chip esp32s3 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp32s3-0.3.13.bin
+esptool.py --chip esp32c3 --port /dev/ttyACM0 write_flash 0x0 aiqnode-esp32c3-0.3.13.bin
+esptool.py --chip esp8266 --port /dev/ttyUSB0 write_flash 0x0 aiqnode-esp8266-0.3.13.bin
 ```
 
 Or in Chrome or Edge open <https://espressif.github.io/esptool-js/>, connect your board, set the flash address to `0x0`, choose the `.bin` for your board and press Program. Check a download with `sha256sum <file>` and compare it with the table above.
+
+## What is new in 0.3.13
+
+- Updates over the internet: from this version on, the AIQnode app can update the board without a USB cable. The board downloads the new firmware itself and installs it only when its checksum matches. Settings, components and automations stay. Update to 0.3.13 once from your browser or with a cable; after that the app offers each new version.
+- Choose when each output switches itself off: after 5 minutes to 24 hours, or never (for lights and fans). The default stays one hour.
+- Short button presses are no longer missed: digital inputs catch presses shorter than the 2-second check.
+- New component: pulse counter for water-flow sensors (YF-S201 and similar) and rain gauges, in pulses per minute or real units such as L/min.
+- Change rules away from home: with Premium remote access on, the app leaves the board's rules with the cloud and the board takes them when it is online.
+- Notifications from the board: a rule that sends a notification can run on the board too (Premium, remote access on) and reaches your phone even when the app is closed.
+- The app shows when a time-of-day rule waits because the board has no internet time yet.
+- ESP8266: uses much less memory and holds up to 8 rules on the board (ESP32 boards hold up to 16); further rules keep running in the app.
 
 ## What is new in 0.3.11
 
